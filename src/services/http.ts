@@ -1,50 +1,51 @@
 import axios from "axios";
 
-import * as LoginProps from "../components/auth/Login/types";
-import * as AuthServices from "../services/auth";
+import * as AuthActions from "../actions/auth";
 import ROUTES from "../constants/routes";
 import ENV_CONSTANTS from "../constants/env";
+
+import store from "../store";
 
 type httpActionProps = (uri: string, options?: any) => any;
 
 axios.defaults.baseURL = ENV_CONSTANTS.API_URL;
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
-axios.interceptors.request.use(
-  function(config) {
-    const accessToken = "accessToken";
+export function initInterceptors(store: any) {
+  axios.interceptors.request.use(
+    function(config) {
+      let state = store.getState();
+      const accessToken = state.data.auth.token.access;
 
-    if (accessToken) config.headers.Authorization = accessToken;
+      if (accessToken) config.headers.Authorization = accessToken;
 
-    return config;
-  },
-  function(err) {
-    return Promise.reject(err);
-  }
-);
-
-axios.interceptors.response.use(undefined, function(err) {
-  const error = err.response;
-  if (error && error.status === 401) {
-    const refreshToken = "refreshToken";
-
-    if (refreshToken) {
-      return new Promise((resolve, reject) => {
-        AuthServices.refresh(refreshToken)
-          .then((response: { data: LoginProps.LoginResponse }) => {
-            resolve(axios(err.config));
-          })
-          .catch(() => {
-            window.location.href = ROUTES.AUTH.LOGIN;
-            reject(err);
-          });
-      });
+      return config;
+    },
+    function(err) {
+      return Promise.reject(err);
     }
+  );
 
-    window.location.href = ROUTES.AUTH.LOGIN;
-  }
-  return Promise.reject(err);
-});
+  axios.interceptors.response.use(undefined, async function(err) {
+    const error = err.response;
+    let state = store.getState();
+    if (error && error.status === 401) {
+      const refreshToken = state.data.auth.token.refresh;
+
+      if (refreshToken) {
+        return new Promise(async (resolve, reject) => {
+          let actionResponse = await store.dispatch(
+            AuthActions.refresh(refreshToken)
+          );
+          resolve(axios(err.config));
+        });
+      }
+
+      window.location.href = ROUTES.AUTH.LOGIN;
+    }
+    return Promise.reject(err);
+  });
+}
 
 export const get: httpActionProps = function(uri, options = {}) {
   let { params } = options;

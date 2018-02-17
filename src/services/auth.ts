@@ -1,28 +1,37 @@
 import * as HTTPServices from "./http";
 
-import * as LoginProps from "../components/auth/Login/types";
-import * as RegisterProps from "../components/auth/Register/types";
+export interface LoginPayload {}
 
-export function login(loginPayload: LoginProps.LoginPayload) {
-  return HTTPServices.post(`/auth/login`, {
+export interface LoginResponse {}
+
+export async function login(loginPayload: LoginPayload) {
+  let response = await HTTPServices.post(`/auth/login`, {
     data: loginPayload
-  }).then((response: { data: LoginProps.LoginResponse }) => {});
+  });
+  return response.data;
 }
 
-export function logout() {
-  return HTTPServices.get("/auth/logout").then(() => {});
+export async function logout() {
+  let response = await HTTPServices.get("/auth/logout");
+  return response.data;
 }
 
-export function register(formData: RegisterProps.RegisterPayload) {
-  return HTTPServices.post(`/users`, {
+export interface RegisterPayload {}
+
+export interface RegisterResponse {}
+
+export async function register(formData: RegisterPayload) {
+  let response = await HTTPServices.post(`/users`, {
     data: formData
   });
+  return response.data;
 }
 
-export function refresh(refreshToken: string) {
-  return HTTPServices.post("/auth/refresh", {
+export async function refresh(refreshToken: string) {
+  let response = await HTTPServices.post("/auth/refresh", {
     data: {
       refreshToken
     }
   });
+  return response.data;
 }

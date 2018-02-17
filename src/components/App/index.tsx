@@ -1,13 +1,16 @@
 import * as React from "react";
-import { BrowserRouter, Link, Redirect, Switch } from "react-router-dom";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { BrowserRouter, Link, Redirect, Switch, Route } from "react-router-dom";
 
 import * as AppProps from "./types";
 
-import Routes from "../routes";
-import PropRoute from "../../components/common/PropsRoute";
-import * as RouteService from "../../services/route";
+import Routes from "../Routes";
+import { store, persistor } from "../../store";
 
-import * as joi from "joi";
+import * as httpServices from "../../services/http";
+
+httpServices.initInterceptors(store);
 
 class App extends React.Component<AppProps.Props, AppProps.State> {
   constructor(props: AppProps.Props) {
@@ -16,15 +19,13 @@ class App extends React.Component<AppProps.Props, AppProps.State> {
 
   render() {
     return (
-      <BrowserRouter>
-        <Switch>
-          {Routes.map((route, index) => {
-            return RouteService.renderRoute(route, {
-              key: index
-            });
-          })}
-        </Switch>
-      </BrowserRouter>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <BrowserRouter>
+            <Routes />
+          </BrowserRouter>
+        </PersistGate>
+      </Provider>
     );
   }
 }
