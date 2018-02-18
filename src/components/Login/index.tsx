@@ -5,8 +5,10 @@ import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
 import { Link, Redirect, withRouter } from "react-router-dom";
 import { compose, withHandlers } from "recompose";
+import { SubmissionError } from "redux-form"; // ES6
 
 import * as LoginProps from "./types";
+import * as LoginFormProps from "./LoginForm/types";
 import * as StoreProps from "../../reducers/types";
 
 import LoginForm from "./LoginForm";
@@ -21,19 +23,7 @@ function Login(props: LoginProps.Props) {
   return (
     <div>
       <h1>Login</h1>
-      <LoginForm />
-      <button
-        onClick={() =>
-          props.login({
-            user: {
-              email: "sudhirshresthaktm+1@gmail.com",
-              password: "password"
-            }
-          })
-        }
-      >
-        Test
-      </button>
+      <LoginForm onSubmit={props.handleLogin} />
       <Link to={ROUTES.AUTH.REGISTER}>Sign up</Link>
     </div>
   );
@@ -51,11 +41,22 @@ function mapDispatchToProps(dispatch: Dispatch<{}>) {
   };
 }
 
-const enhance = compose(
-  connect<LoginProps.StoreProps, LoginProps.DispatchProps, LoginProps.OwnProps>(
-    mapStateToProps,
-    mapDispatchToProps
-  )
+function handleLogin(props: LoginProps.Props) {
+  return async (formData: LoginFormProps.FormDataProps) => {
+    try {
+      await props.login(formData);
+    } catch (err) {
+      const { data } = err.response;
+      throw new SubmissionError({ ...data.details, _error: data.message });
+    }
+  };
+}
+
+const enhance = compose<LoginProps.ComposeProps, LoginProps.OwnProps>(
+  connect(mapStateToProps, mapDispatchToProps),
+  withHandlers({
+    handleLogin
+  })
 );
 
 export default enhance(Login);
