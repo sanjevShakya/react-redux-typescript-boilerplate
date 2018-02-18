@@ -6,7 +6,7 @@ import * as AuthActions from "../../actions/auth";
 import * as AuthServices from "../../services/auth";
 
 export type OwnProps = {
-  onSubmit: (payload: AuthServices.RegisterPayload) => void;
+  handleRegister: (payload: AuthServices.RegisterPayload) => void;
 };
 
 export type StoreProps = {

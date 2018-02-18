@@ -3,8 +3,10 @@ import { bindActionCreators } from "redux";
 import { connect, Dispatch } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { compose, withHandlers } from "recompose";
+import { SubmissionError } from "redux-form"; // ES6
 
 import * as RegisterProps from "./types";
+import * as RegisterFormProps from "./RegisterForm/types";
 import * as StoreProps from "../../reducers/types";
 
 import ROUTES from "../../constants/routes";
@@ -20,21 +22,7 @@ function Register(props: RegisterProps.Props) {
   return (
     <div>
       <h1>Register</h1>
-      <RegisterForm />
-      <button
-        onClick={() => {
-          props.onSubmit({
-            user: {
-              firstName: "Sudhir",
-              lastName: "Shrestha",
-              email: `sudhirshrestha+${new Date().getTime()}@gmail.com`,
-              password: "password"
-            }
-          });
-        }}
-      >
-        test
-      </button>
+      <RegisterForm onSubmit={props.handleRegister} />
       <Link to={ROUTES.AUTH.LOGIN}>Login</Link>
     </div>
   );
@@ -46,19 +34,27 @@ function mapStateToProps(state: StoreProps.Props) {
   };
 }
 
+function handleRegister(props: RegisterProps.Props) {
+  return async (formData: RegisterFormProps.FormDataProps) => {
+    try {
+      let data = { ...formData };
+      data.user && delete data.user.confirmPassword;
+      await AuthServices.register(data);
+      props.history.push(ROUTES.AUTH.LOGIN);
+    } catch (err) {
+      const { data } = err.response;
+      throw new SubmissionError({ ...data.details, _error: data.message });
+    }
+  };
+}
+
 const enhance = compose(
   connect<RegisterProps.StoreProps, {}, RegisterProps.OwnProps>(
     mapStateToProps,
     null
   ),
   withHandlers({
-    onSubmit: (props: RegisterProps.Props) => (
-      data: AuthServices.RegisterPayload
-    ) => {
-      return AuthServices.register(data).then(() => {
-        props.history.push(ROUTES.AUTH.LOGIN);
-      });
-    }
+    handleRegister
   })
 );
 
