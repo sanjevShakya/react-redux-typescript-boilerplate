@@ -13,6 +13,7 @@ import ROUTES from "../../constants/routes";
 import * as AuthServices from "../../services/auth";
 import RegisterForm from "./RegisterForm";
 import * as AuthActions from "../../actions/auth";
+import * as JSONUtils from "../../utils/json";
 
 function Register(props: RegisterProps.Props) {
   if (props.auth.isLoggedIn) {
@@ -37,7 +38,7 @@ function mapStateToProps(state: StoreProps.Props) {
 function handleRegister(props: RegisterProps.Props) {
   return async (formData: RegisterFormProps.FormDataProps) => {
     try {
-      let data = { ...formData };
+      let data = JSONUtils.deepCopyJSON(formData);
       data.user && delete data.user.confirmPassword;
       await AuthServices.register(data);
       props.history.push(ROUTES.AUTH.LOGIN);
