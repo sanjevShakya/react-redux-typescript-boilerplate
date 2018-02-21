@@ -6,6 +6,7 @@ import * as RegisterFormProps from "./types";
 
 import { Field, reduxForm } from "redux-form";
 import InputField from "../../common/InputField";
+import SelectField from "../../common/SelectField";
 import ValidatorUtils from "../../../common/utils/validator.js";
 import UsersSchema from "../../../common/schemas/users.js";
 
@@ -37,11 +38,22 @@ function RegisterForm(props: RegisterFormProps.Props) {
         component={InputField}
       />
       <Field
-        label="Password"
-        placeholder="Password"
-        name="user.password"
-        type="password"
+        label="Email"
+        placeholder="Email"
+        name="user.email"
+        type="text"
         component={InputField}
+      />
+      <Field
+        label="Test"
+        placeholder="Test"
+        name="user.test"
+        component={SelectField}
+        options={[
+          { value: "one", label: "One" },
+          { value: "two", label: "Two" }
+        ]}
+        clearable={true}
       />
       <Field
         label="Confirm password"
@@ -54,6 +66,7 @@ function RegisterForm(props: RegisterFormProps.Props) {
     </form>
   );
 }
+//TODO: Datetime, Checkbox, multiselect
 
 const enhance = compose<
   RegisterFormProps.ComposeProps,

@@ -1,3 +1,5 @@
+import "react-select/dist/react-select.css";
+
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
