@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start:webpack": "webpack",
-    "start:dev": "webpack-dev-server --env.NODE_ENV=local --env.production --progress",
+    "start:dev":
+      "webpack-dev-server --env.NODE_ENV=local --env.production --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -28,7 +29,6 @@
     "@types/redux-thunk": "^2.1.0",
     "axios": "^0.17.1",
     "css-loader": "^0.28.9",
-    "cypress": "^2.0.2",
     "dotenv": "^5.0.0",
     "html-webpack-plugin": "^2.30.1",
     "joi": "^13.1.2",
