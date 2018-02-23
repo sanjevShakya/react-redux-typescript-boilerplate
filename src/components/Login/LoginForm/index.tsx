@@ -12,8 +12,8 @@ export const FORM_NAME = "LOGIN_FORM";
 
 function LoginForm(props: LoginFormProps.Props) {
   return (
-    <form onSubmit={props.handleSubmit}>
-      {props.error && <p>{props.error}</p>}
+    <form className="login-form" onSubmit={props.handleSubmit}>
+      {props.error && <p className="form-error-message">{props.error}</p>}
       <Field
         label="Email"
         placeholder="Email"

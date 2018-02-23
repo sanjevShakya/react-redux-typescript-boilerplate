@@ -7,10 +7,16 @@ interface PropTypes {
   placeholder: string;
   label: string;
   clearable?: boolean;
+  multi?: boolean;
+}
+
+interface OptionProps {
+  value: string;
+  label: string;
 }
 
 const SelectField = (props: PropTypes & WrappedFieldProps) => {
-  const { input, placeholder, meta: { touched, error }, label } = props;
+  const { input, placeholder, meta: { touched, error }, label, multi } = props;
 
   return (
     <div>
@@ -19,12 +25,15 @@ const SelectField = (props: PropTypes & WrappedFieldProps) => {
         clearable={props.clearable}
         name="form-field-name"
         value={input.value}
-        onChange={(selection: { value: string; label: string }) => {
-          let value = selection ? selection.value : null;
+        onChange={(selection: OptionProps & Array<OptionProps>) => {
+          let value = null;
+          if (selection) {
+            value = multi ? selection.map(s => s.value) : selection.value;
+          }
           input.onChange(value);
         }}
         options={props.options}
-        multi={true}
+        multi={multi}
       />
       {touched && error && <p className="error-msg">{error}</p>}
     </div>
