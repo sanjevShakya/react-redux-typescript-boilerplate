@@ -4,8 +4,8 @@ import * as AuthProps from "../../reducers/data/auth/types";
 import * as ItemProps from "../../reducers/data/items/types";
 import * as ItemSelectorProps from "../../selectors/items";
 
-import * as AuthActions from "../../actions/auth";
-import * as ItemActions from "../../actions/items";
+import * as AuthActions from "../../actions/data/auth";
+import * as ItemActions from "../../actions/data/items";
 
 export type OwnProps = {};
 

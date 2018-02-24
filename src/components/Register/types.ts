@@ -2,7 +2,7 @@
 import { RouteComponentProps } from "react-router-dom";
 
 import * as AuthProps from "../../reducers/data/auth/types";
-import * as AuthActions from "../../actions/auth";
+import * as AuthActions from "../../actions/data/auth";
 import * as AuthServices from "../../services/auth";
 
 export type OwnProps = {

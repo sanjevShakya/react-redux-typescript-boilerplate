@@ -13,7 +13,7 @@ import * as StoreProps from "../../reducers/types";
 
 import LoginForm from "./LoginForm";
 import ROUTES from "../../constants/routes";
-import * as AuthActions from "../../actions/auth";
+import * as AuthActions from "../../actions/data/auth";
 
 function Login(props: LoginProps.Props) {
   if (props.auth.isLoggedIn) {

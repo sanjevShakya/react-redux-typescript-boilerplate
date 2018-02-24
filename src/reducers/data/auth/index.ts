@@ -1,4 +1,4 @@
-import * as AuthActions from "../../../actions/auth";
+import * as AuthActions from "../../../actions/data/auth";
 import * as AuthProps from "./types";
 
 const {

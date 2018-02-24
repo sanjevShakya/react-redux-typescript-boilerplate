@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 
-import * as AuthServices from "../services/auth";
+import * as AuthServices from "../../services/auth";
 
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";

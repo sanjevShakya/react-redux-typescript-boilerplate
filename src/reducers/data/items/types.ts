@@ -1,4 +1,4 @@
-import * as ItemActions from "../../../actions/items";
+import * as ItemActions from "../../../actions/data/items";
 
 const { FETCH_ITEMS_FULFILLLED, FETCH_ITEMS_REJECTED } = ItemActions.ACTIONS;
 

@@ -8,8 +8,8 @@ import * as DashboardProps from "./types";
 import * as StoreProps from "../../reducers/types";
 
 import ROUTES from "../../constants/routes";
-import * as ItemActions from "../../actions/items";
-import * as AuthActions from "../../actions/auth";
+import * as ItemActions from "../../actions/data/items";
+import * as AuthActions from "../../actions/data/auth";
 import * as DashboardUIActions from "../../actions/ui/dashboard";
 import * as ItemSelectors from "../../selectors/items";
 

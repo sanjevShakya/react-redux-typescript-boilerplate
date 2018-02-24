@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import * as AuthActions from "../actions/auth";
+import * as AuthActions from "../actions/data/auth";
 import ROUTES from "../constants/routes";
 import ENV_CONSTANTS from "../constants/env";
 

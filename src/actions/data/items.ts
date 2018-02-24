@@ -1,7 +1,7 @@
 import { Dispatch } from "redux";
 import { normalize, schema } from "normalizr";
 
-import * as ItemServices from "../services/items";
+import * as ItemServices from "../../services/items";
 
 export const FETCH_ITEMS = "FETCH_ITEMS";
 

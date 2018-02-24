@@ -1,4 +1,4 @@
-import * as ItemActions from "../../../actions/items";
+import * as ItemActions from "../../../actions/data/items";
 import * as ItemProps from "./types";
 
 import { combineReducers } from "redux";

@@ -12,7 +12,7 @@ import * as StoreProps from "../../reducers/types";
 import ROUTES from "../../constants/routes";
 import * as AuthServices from "../../services/auth";
 import RegisterForm from "./RegisterForm";
-import * as AuthActions from "../../actions/auth";
+import * as AuthActions from "../../actions/data/auth";
 import * as JSONUtils from "../../utils/json";
 
 function Register(props: RegisterProps.Props) {

@@ -3,7 +3,7 @@
 import * as LoginFormProps from "./LoginForm/types";
 
 import * as AuthProps from "../../reducers/data/auth/types";
-import * as AuthActions from "../../actions/auth";
+import * as AuthActions from "../../actions/data/auth";
 
 export type OwnProps = {
   handleLogin: (d: LoginFormProps.FormDataProps) => void;
