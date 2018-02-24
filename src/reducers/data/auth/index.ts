@@ -1,4 +1,5 @@
 import * as AuthActions from "../../../actions/auth";
+import * as AuthProps from "./types";
 
 const {
   LOGIN_FULFILLLED,
@@ -8,23 +9,7 @@ const {
   REFRESH_REJECTED
 } = AuthActions.ACTIONS;
 
-interface StateProps {
-  isLoggedIn: boolean;
-  token: {
-    access: string;
-    refresh: string;
-  };
-}
-
-interface ActionTypes {
-  type:
-    | typeof LOGIN_FULFILLLED
-    | typeof LOGIN_REJECTED
-    | typeof LOGOUT_FULFILLLED;
-  payload: any;
-}
-
-const DEFAULT_STATE: StateProps = {
+const DEFAULT_STATE: AuthProps.StateProps = {
   isLoggedIn: false,
   token: {
     access: null,
@@ -32,7 +17,10 @@ const DEFAULT_STATE: StateProps = {
   }
 };
 
-export default (state: StateProps = DEFAULT_STATE, action: ActionTypes) => {
+export default (
+  state: AuthProps.StateProps = DEFAULT_STATE,
+  action: AuthProps.ActionTypes
+) => {
   switch (action.type) {
     case LOGIN_FULFILLLED: {
       return {

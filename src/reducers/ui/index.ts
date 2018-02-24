@@ -1,8 +1,6 @@
 import { combineReducers } from "redux";
-import auth from "./auth";
-import items from "./items";
+import Dashboard from "./Dashboard";
 
 export default combineReducers({
-  auth,
-  items
+  Dashboard
 });

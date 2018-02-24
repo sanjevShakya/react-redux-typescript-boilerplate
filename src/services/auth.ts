@@ -1,6 +1,11 @@
 import * as HTTPServices from "./http";
 
-export interface LoginPayload {}
+export interface LoginPayload {
+  user: {
+    email?: string;
+    password?: string;
+  };
+}
 
 export interface LoginResponse {}
 

@@ -1,5 +1,25 @@
-export interface Props {
+import * as AuthActions from "../../../actions/auth";
+
+const {
+  LOGIN_FULFILLLED,
+  LOGIN_REJECTED,
+  LOGOUT_FULFILLLED,
+  REFRESH_FULFILLLED,
+  REFRESH_REJECTED
+} = AuthActions.ACTIONS;
+
+export interface StateProps {
   isLoggedIn: boolean;
-  accessToken: string;
-  refreshToken: string;
+  token: {
+    access: string;
+    refresh: string;
+  };
+}
+
+export interface ActionTypes {
+  type:
+    | typeof LOGIN_FULFILLLED
+    | typeof LOGIN_REJECTED
+    | typeof LOGOUT_FULFILLLED;
+  payload: any;
 }

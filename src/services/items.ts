@@ -1,5 +1,5 @@
 import axios from "axios";
 
-export function getAll() {
+export function fetchAll() {
   return axios.get("/items");
 }

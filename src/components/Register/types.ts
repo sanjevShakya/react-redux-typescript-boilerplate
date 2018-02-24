@@ -10,7 +10,7 @@ export type OwnProps = {
 };
 
 export type StoreProps = {
-  auth: AuthProps.Props;
+  auth: AuthProps.StateProps;
 };
 
 export type DispatchProps = {};

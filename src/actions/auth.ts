@@ -1,5 +1,3 @@
-import { createActions } from "redux-actions";
-
 import { Dispatch } from "redux";
 
 import * as AuthServices from "../services/auth";
@@ -22,8 +20,61 @@ export const ACTIONS = {
   REFRESH_REJECTED: `${REFRESH}_REJECTED`
 };
 
-export const { login, logout, refresh } = createActions({
-  [LOGIN]: AuthServices.login,
-  [LOGOUT]: AuthServices.logout,
-  [REFRESH]: AuthServices.refresh
-});
+export const login = (data: AuthServices.LoginPayload) => {
+  return (dispatch: Dispatch<{}>) => {
+    dispatch({
+      type: ACTIONS.LOGIN_PENDING
+    });
+    AuthServices.login(data)
+      .then(response => {
+        dispatch({
+          type: ACTIONS.LOGIN_FULFILLLED,
+          payload: response
+        });
+      })
+      .catch(() => {
+        dispatch({
+          type: ACTIONS.LOGIN_REJECTED
+        });
+      });
+  };
+};
+
+export const logout = () => {
+  return (dispatch: Dispatch<{}>) => {
+    dispatch({
+      type: ACTIONS.LOGOUT_PENDING
+    });
+    AuthServices.logout()
+      .then(() => {
+        dispatch({
+          type: ACTIONS.LOGOUT_FULFILLLED
+        });
+      })
+      .catch(() => {
+        dispatch({
+          type: ACTIONS.LOGOUT_REJECTED
+        });
+      });
+  };
+};
+
+export const refresh = (refreshToken: string) => {
+  return (dispatch: Dispatch<{}>) => {
+    dispatch({
+      type: ACTIONS.REFRESH_PENDING
+    });
+    AuthServices.refresh(refreshToken)
+      .then(response => {
+        dispatch({
+          type: ACTIONS.REFRESH_FULFILLLED,
+          payload: response
+        });
+      })
+      .catch(() => {
+        dispatch({
+          type: ACTIONS.REFRESH_REJECTED
+        });
+      });
+  };
+};
