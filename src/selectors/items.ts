@@ -18,9 +18,7 @@ export const getVisibleItems = createSelector(getItems, items => {
   return {
     isLoading: items.meta.isLoading,
     error: items.meta.error,
-    data: items.ids.map(id => {
-      return items.byId[id];
-    })
+    data: items.ids.map(id => items.byId[id])
   };
 });
 

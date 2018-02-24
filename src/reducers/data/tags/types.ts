@@ -1,12 +1,10 @@
-import * as ItemActions from "../../../actions/data/items";
+import * as TagActions from "../../../actions/data/tags";
 
-const { FETCH_ITEMS_FULFILLLED, FETCH_ITEMS_REJECTED } = ItemActions.ACTIONS;
+const { FETCH_TAGS_FULFILLLED, FETCH_TAGS_REJECTED } = TagActions.ACTIONS;
 
-export interface ItemProps {
+export interface TagProps {
   id: string;
   name: string;
-  description: string;
-  tags: Array<string>;
 }
 
 export interface MetaProps {
@@ -15,7 +13,7 @@ export interface MetaProps {
 }
 
 export interface ByIdProps {
-  [id: string]: ItemProps;
+  [id: string]: TagProps;
 }
 
 export type IDsProps = Array<string>;
@@ -27,6 +25,6 @@ export interface StateProps {
 }
 
 export interface ActionTypes {
-  type: typeof FETCH_ITEMS_FULFILLLED | typeof FETCH_ITEMS_REJECTED;
+  type: typeof FETCH_TAGS_FULFILLLED | typeof FETCH_TAGS_REJECTED;
   payload: any;
 }

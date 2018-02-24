@@ -2,10 +2,13 @@ import { Dispatch } from "redux";
 import { normalize, schema } from "normalizr";
 
 import * as ItemServices from "../../services/items";
+import { TAG_SCHEMA } from "./tags";
 
 export const FETCH_ITEMS = "FETCH_ITEMS";
 
-const ITEM_SCHEMA = new schema.Entity("items");
+const ITEM_SCHEMA = new schema.Entity("items", {
+  tags: [TAG_SCHEMA]
+});
 const ITEM_LIST_SCHEMA = [ITEM_SCHEMA];
 
 export const ACTIONS = {
