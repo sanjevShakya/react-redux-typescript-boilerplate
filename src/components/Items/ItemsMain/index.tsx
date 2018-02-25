@@ -5,16 +5,16 @@ import { Redirect, withRouter } from "react-router";
 import { compose, withHandlers } from "recompose";
 
 import * as ItemsMainProps from "./types";
-import * as StoreProps from "../../reducers/types";
+import * as StoreProps from "../../../reducers/types";
 
-import ROUTES from "../../constants/routes";
-import * as ItemActions from "../../actions/data/items";
+import ROUTES from "../../../constants/routes";
+import * as ItemActions from "../../../actions/data/items";
 
-import * as ItemUIActions from "../../actions/ui/items";
-import * as ItemSelectors from "../../selectors/items";
+import * as ItemUIActions from "../../../actions/ui/items";
+import * as ItemSelectors from "../../../selectors/items";
 
-import ItemsList from "../Items/ItemsList";
-import ItemCard from "../Items/ItemCard";
+import ItemsList from "../../Items/ItemsList";
+import ItemCard from "../../Items/ItemCard";
 
 class ItemsMain extends React.Component<ItemsMainProps.Props> {
   constructor(props: ItemsMainProps.Props) {
@@ -29,13 +29,14 @@ class ItemsMain extends React.Component<ItemsMainProps.Props> {
     return (
       <div>
         <h1>Item</h1>
+        {this.props.item && <ItemCard item={this.props.item} />}
+
         <ItemsList
           items={items.data}
           isLoading={items.isLoading}
           error={items.error}
           selectItem={this.props.updateSelectedItem}
         />
-        {this.props.item && <ItemCard item={this.props.item} />}
       </div>
     );
   }

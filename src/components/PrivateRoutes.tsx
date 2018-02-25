@@ -7,7 +7,7 @@ import ROUTES from "../constants/routes";
 import Login from "./Login";
 
 import Dashboard from "./Dashboard";
-import Items from "./Items";
+import ItemsMain from "./Items/ItemsMain";
 import NotFound from "./NotFound";
 
 function PrivateRoutes(props: any) {
@@ -17,7 +17,7 @@ function PrivateRoutes(props: any) {
   return (
     <Switch>
       <Route exact path={ROUTES.DASHBOARD} component={Dashboard} />
-      <Route exact path={ROUTES.ITEMS} component={Items} />
+      <Route exact path={ROUTES.ITEMS} component={ItemsMain} />
       <Route component={NotFound} />
     </Switch>
   );

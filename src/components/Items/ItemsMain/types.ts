@@ -1,10 +1,10 @@
 // components/Dashboard/types
 
-import * as ItemProps from "../../reducers/data/items/types";
-import * as ItemSelectorProps from "../../selectors/items";
+import * as ItemProps from "../../../reducers/data/items/types";
+import * as ItemSelectorProps from "../../../selectors/items";
 
-import * as AuthActions from "../../actions/data/auth";
-import * as ItemActions from "../../actions/data/items";
+import * as AuthActions from "../../../actions/data/auth";
+import * as ItemActions from "../../../actions/data/items";
 
 export type OwnProps = {};
 
