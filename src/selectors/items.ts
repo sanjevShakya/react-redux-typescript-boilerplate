@@ -7,25 +7,34 @@ const getOptions = (state: StoreProps.Props, options: any) => options;
 
 const getData = (state: StoreProps.Props) => state.data;
 const getItems = createSelector(getData, data => data.items);
+const getTags = createSelector(getData, data => data.tags);
 
 export interface ItemListProps {
   isLoading: boolean;
   error: string;
-  data: Array<ItemProps.ItemProps>;
+  data: Array<string>;
 }
 
 export const getVisibleItems = createSelector(getItems, items => {
   return {
     isLoading: items.meta.isLoading,
     error: items.meta.error,
-    data: items.ids.map(id => items.byId[id])
+    data: items.ids
   };
 });
 
 export const getItem = createSelector(
   getOptions,
+  getTags,
   getItems,
-  (options, items) => {
-    return items.byId[options.itemId];
+  (options, tags, items) => {
+    let item = items.byId[options.itemId];
+
+    return {
+      ...item,
+      tags: item.tags.map(tagId => {
+        return tags.byId[tagId];
+      })
+    };
   }
 );

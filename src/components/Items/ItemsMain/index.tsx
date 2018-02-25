@@ -16,7 +16,7 @@ import * as ItemSelectors from "../../../selectors/items";
 import ItemsList from "../../Items/ItemsList";
 import ItemCard from "../../Items/ItemCard";
 
-class ItemsMain extends React.Component<ItemsMainProps.Props> {
+class ItemsMain extends React.PureComponent<ItemsMainProps.Props> {
   constructor(props: ItemsMainProps.Props) {
     super(props);
   }
@@ -25,33 +25,29 @@ class ItemsMain extends React.Component<ItemsMainProps.Props> {
   }
 
   render() {
-    const { items } = this.props;
+    const { items, selectedItemId } = this.props;
     return (
       <div>
         <h1>Item</h1>
-        {this.props.item && <ItemCard item={this.props.item} />}
+        {selectedItemId && <ItemCard itemId={selectedItemId} />}
 
         <ItemsList
           items={items.data}
           isLoading={items.isLoading}
           error={items.error}
-          selectItem={this.props.updateSelectedItem}
+          onSelectItem={this.props.updateSelectedItem}
         />
       </div>
     );
   }
 }
 
-function mapStateToProps(state: StoreProps.Props, props: any) {
+function mapStateToProps(state: StoreProps.Props) {
   let items = ItemSelectors.getVisibleItems(state);
   let selectedItemId = state.ui.Items.selectedItemId;
-  let item =
-    selectedItemId && !items.isLoading && items.data.length
-      ? ItemSelectors.getItem(state, { itemId: selectedItemId })
-      : null;
   return {
     items,
-    item
+    selectedItemId
   };
 }
 

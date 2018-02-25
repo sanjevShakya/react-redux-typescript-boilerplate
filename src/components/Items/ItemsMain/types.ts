@@ -10,7 +10,7 @@ export type OwnProps = {};
 
 export type StoreProps = {
   items: ItemSelectorProps.ItemListProps;
-  item: ItemProps.ItemProps;
+  selectedItemId: string;
 };
 
 export type DispatchProps = {
