@@ -7,7 +7,6 @@ const getOptions = (state: StoreProps.Props, options: any) => options;
 
 const getData = (state: StoreProps.Props) => state.data;
 const getItems = createSelector(getData, data => data.items);
-const getTags = createSelector(getData, data => data.tags);
 
 export interface ItemListProps {
   isLoading: boolean;
@@ -23,18 +22,11 @@ export const getVisibleItems = createSelector(getItems, items => {
   };
 });
 
-export const getItem = createSelector(
-  getOptions,
-  getTags,
-  getItems,
-  (options, tags, items) => {
-    let item = items.byId[options.itemId];
-
-    return {
-      ...item,
-      tags: item.tags.map(tagId => {
-        return tags.byId[tagId];
-      })
-    };
-  }
-);
+export const makeGetItem = () =>
+  createSelector(
+    (state: StoreProps.Props, itemId: string) => itemId,
+    getItems,
+    (itemId, items) => {
+      return items.byId[itemId];
+    }
+  );

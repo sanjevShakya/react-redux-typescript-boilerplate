@@ -8,6 +8,7 @@ export interface OwnProps {
 
 export type ComposeProps = {
   item: ItemReducerProps.ItemProps<TagReducerProps.TagProps>;
+  tags: Array<TagReducerProps.TagProps>;
 };
 
 export type Props = ComposeProps & OwnProps;

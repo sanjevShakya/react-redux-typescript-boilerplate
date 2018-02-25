@@ -25,3 +25,14 @@ export const getVisibleTags = createSelector(getTags, tags => {
 export const getTag = createSelector(getOptions, getTags, (options, tags) => {
   return tags.byId[options.tagId];
 });
+
+export const makeGetTagsByIds = () =>
+  createSelector(
+    (state: StoreProps.Props, tagIds: Array<string>) => tagIds,
+    getTags,
+    (tagIds, tags) => {
+      return tagIds.map((tagId: string) => {
+        return tags.byId[tagId];
+      });
+    }
+  );

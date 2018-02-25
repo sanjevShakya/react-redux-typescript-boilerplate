@@ -3,10 +3,10 @@ import * as ItemActions from "../../../actions/data/items";
 const { FETCH_ITEMS_FULFILLLED, FETCH_ITEMS_REJECTED } = ItemActions.ACTIONS;
 
 export interface ItemProps<TagProps> {
-  id: string;
-  name: string;
-  description: string;
-  tags: Array<TagProps>;
+  id?: string;
+  name?: string;
+  description?: string;
+  tags?: Array<TagProps>;
 }
 
 export interface MetaProps {

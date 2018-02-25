@@ -1,6 +1,6 @@
 import * as React from "react";
 import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
+import { connect, Dispatch } from "react-redux";
 import { Redirect, withRouter } from "react-router";
 import { compose, withHandlers } from "recompose";
 
@@ -15,11 +15,13 @@ import * as ItemSelectors from "../../../selectors/items";
 
 import ItemsList from "../../Items/ItemsList";
 import ItemCard from "../../Items/ItemCard";
+import ItemForm from "../../Items/ItemForm";
 
 class ItemsMain extends React.PureComponent<ItemsMainProps.Props> {
   constructor(props: ItemsMainProps.Props) {
     super(props);
   }
+
   componentWillMount() {
     return this.props.fetchItems();
   }
@@ -29,8 +31,8 @@ class ItemsMain extends React.PureComponent<ItemsMainProps.Props> {
     return (
       <div>
         <h1>Item</h1>
+        <ItemForm onSubmit={this.props.createItem} />
         {selectedItemId && <ItemCard itemId={selectedItemId} />}
-
         <ItemsList
           items={items.data}
           isLoading={items.isLoading}
@@ -51,9 +53,10 @@ function mapStateToProps(state: StoreProps.Props) {
   };
 }
 
-function mapDispatchToProps(dispatch: any) {
+function mapDispatchToProps(dispatch: Dispatch<{}>) {
   return {
     fetchItems: bindActionCreators(ItemActions.fetchItems, dispatch),
+    createItem: bindActionCreators(ItemActions.createItem, dispatch),
     updateSelectedItem: bindActionCreators(
       ItemUIActions.selectedItemChanged,
       dispatch

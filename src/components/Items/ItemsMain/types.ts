@@ -15,6 +15,7 @@ export type StoreProps = {
 
 export type DispatchProps = {
   fetchItems: typeof ItemActions.fetchItems;
+  createItem: typeof ItemActions.createItem;
   updateSelectedItem: (id: string) => void;
 };
 

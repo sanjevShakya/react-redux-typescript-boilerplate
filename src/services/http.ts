@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse, AxiosPromise } from "axios";
 
 import * as AuthActions from "../actions/data/auth";
 import ROUTES from "../constants/routes";
@@ -6,7 +6,7 @@ import ENV_CONSTANTS from "../constants/env";
 
 import store from "../store";
 
-type httpActionProps = (uri: string, options?: any) => any;
+type HttpActionProps = (uri: string, options?: any) => AxiosPromise;
 
 axios.defaults.baseURL = ENV_CONSTANTS.API_URL;
 axios.defaults.headers.post["Content-Type"] = "application/json";
@@ -47,7 +47,7 @@ export function initInterceptors(store: any) {
   });
 }
 
-export const get: httpActionProps = function(uri, options = {}) {
+export const get: HttpActionProps = function(uri, options = {}) {
   let { params } = options;
   return axios({
     method: "get",
@@ -57,7 +57,7 @@ export const get: httpActionProps = function(uri, options = {}) {
   });
 };
 
-export const post: httpActionProps = function(uri, options = {}) {
+export const post: HttpActionProps = function(uri, options = {}) {
   let { data } = options;
   return axios({
     method: "post",
