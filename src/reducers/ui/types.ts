@@ -1,5 +1,5 @@
-import * as DashboardUIProps from "./Dashboard/types";
+import * as ItemsUIProps from "./Items/types";
 
 export interface Props {
-  Dashboard: DashboardUIProps.StateProps;
+  Items: ItemsUIProps.StateProps;
 }

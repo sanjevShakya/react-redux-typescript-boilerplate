@@ -1,6 +1,6 @@
-import * as DashboardUIActions from "../../../actions/ui/dashboard";
+import * as ItemsUIActions from "../../../actions/ui/items";
 
-const { SELECTED_ITEM_CHANGED } = DashboardUIActions.ACTIONS;
+const { SELECTED_ITEM_CHANGED } = ItemsUIActions.ACTIONS;
 
 export interface StateProps {
   selectedItemId: string;

@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import Dashboard from "./Dashboard";
+import Items from "./Items";
 
 export default combineReducers({
-  Dashboard
+  Items
 });

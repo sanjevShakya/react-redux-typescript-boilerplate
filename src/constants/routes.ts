@@ -4,5 +4,6 @@ export default {
     REGISTER: "/register"
   },
   DASHBOARD: "/dashboard",
+  ITEMS: "/items",
   HOME: "/"
 };
