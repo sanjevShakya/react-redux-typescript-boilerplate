@@ -3,7 +3,7 @@ import { WrappedFieldProps } from "redux-form";
 import Select from "react-select";
 
 interface PropTypes {
-  options: Array<any>;
+  options: Array<OptionProps>;
   placeholder: string;
   label: string;
   clearable?: boolean;

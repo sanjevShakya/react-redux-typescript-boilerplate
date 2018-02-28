@@ -2,11 +2,13 @@ import * as ItemActions from "../../../actions/data/items";
 
 const { FETCH_ITEMS_FULFILLLED, FETCH_ITEMS_REJECTED } = ItemActions.ACTIONS;
 
-export interface ItemProps<TagProps> {
+export interface ItemProps {
   id?: string;
   name?: string;
   description?: string;
-  tags?: Array<TagProps>;
+  tags?: Array<string>;
+  updated_at?: string;
+  created_at?: string;
 }
 
 export interface MetaProps {
@@ -15,7 +17,7 @@ export interface MetaProps {
 }
 
 export interface ByIdProps {
-  [id: string]: ItemProps<string>;
+  [id: string]: ItemProps;
 }
 
 export type IDsProps = Array<string>;

@@ -5,7 +5,7 @@ import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
 import { Link, Redirect, withRouter } from "react-router-dom";
 import { compose, withHandlers } from "recompose";
-import { SubmissionError } from "redux-form"; // ES6
+import { SubmissionError } from "redux-form";
 
 import * as LoginProps from "./types";
 import * as LoginFormProps from "./LoginForm/types";

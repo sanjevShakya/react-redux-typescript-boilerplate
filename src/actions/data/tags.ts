@@ -14,7 +14,7 @@ export const ACTIONS = {
   FETCH_TAGS_REJECTED: `${FETCH_TAGS}_REJECTED`
 };
 
-export const fetchTagss = () => {
+export const fetchTags = () => {
   return (dispatch: Dispatch<{}>) => {
     dispatch({
       type: ACTIONS.FETCH_TAGS_PENDING

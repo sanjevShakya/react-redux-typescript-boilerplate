@@ -5,7 +5,7 @@ import { BrowserRouter, Link, Redirect, Switch, Route } from "react-router-dom";
 
 import * as AppProps from "./types";
 
-import Routes from "../Routes";
+import Main from "../Main";
 import { store, persistor } from "../../store";
 
 import * as httpServices from "../../services/http";
@@ -22,7 +22,7 @@ class App extends React.Component<AppProps.Props, AppProps.State> {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <BrowserRouter>
-            <Routes />
+            <Main />
           </BrowserRouter>
         </PersistGate>
       </Provider>

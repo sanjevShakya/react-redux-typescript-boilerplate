@@ -3,13 +3,14 @@ import { bindActionCreators } from "redux";
 import { connect, Dispatch } from "react-redux";
 import { Redirect, withRouter } from "react-router";
 import { compose, withHandlers } from "recompose";
+import { SubmissionError } from "redux-form";
 
 import * as ItemsMainProps from "./types";
+import * as ItemFormProps from "../../Items/ItemForm/types";
 import * as StoreProps from "../../../reducers/types";
 
 import ROUTES from "../../../constants/routes";
 import * as ItemActions from "../../../actions/data/items";
-
 import * as ItemUIActions from "../../../actions/ui/items";
 import * as ItemSelectors from "../../../selectors/items";
 
@@ -26,13 +27,33 @@ class ItemsMain extends React.PureComponent<ItemsMainProps.Props> {
     return this.props.fetchItems();
   }
 
+  saveItem = async (data: ItemFormProps.FormDataProps) => {
+    try {
+      await this.props.saveItem(data);
+    } catch (err) {
+      const { data } = err.response;
+      throw new SubmissionError({ ...data.details, _error: data.message });
+    }
+  };
+
   render() {
-    const { items, selectedItemId } = this.props;
+    const { items, selectedItem } = this.props;
     return (
       <div>
         <h1>Item</h1>
-        <ItemForm onSubmit={this.props.createItem} />
-        {selectedItemId && <ItemCard itemId={selectedItemId} />}
+        <div>
+          <p>CREATE FORM</p>
+          <ItemForm onSubmit={this.saveItem} />
+        </div>
+        {selectedItem && (
+          <div>
+            <p>EDIT FORM</p>
+            <ItemForm
+              initialValues={{ item: selectedItem }}
+              onSubmit={this.saveItem}
+            />
+          </div>
+        )}
         <ItemsList
           items={items.data}
           isLoading={items.isLoading}
@@ -44,19 +65,24 @@ class ItemsMain extends React.PureComponent<ItemsMainProps.Props> {
   }
 }
 
-function mapStateToProps(state: StoreProps.Props) {
-  let items = ItemSelectors.getVisibleItems(state);
-  let selectedItemId = state.ui.Items.selectedItemId;
-  return {
-    items,
-    selectedItemId
+function mapStateToProps() {
+  let getItem = ItemSelectors.makeGetItem();
+
+  return (state: StoreProps.Props) => {
+    let items = ItemSelectors.getVisibleItems(state);
+    let selectedItem = getItem(state, state.ui.Items.selectedItemId);
+
+    return {
+      items,
+      selectedItem
+    };
   };
 }
 
 function mapDispatchToProps(dispatch: Dispatch<{}>) {
   return {
     fetchItems: bindActionCreators(ItemActions.fetchItems, dispatch),
-    createItem: bindActionCreators(ItemActions.createItem, dispatch),
+    saveItem: bindActionCreators(ItemActions.saveItem, dispatch),
     updateSelectedItem: bindActionCreators(
       ItemUIActions.selectedItemChanged,
       dispatch

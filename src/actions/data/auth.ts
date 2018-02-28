@@ -32,10 +32,11 @@ export const login = (data: AuthServices.LoginPayload) => {
           payload: response
         });
       })
-      .catch(() => {
+      .catch(err => {
         dispatch({
           type: ACTIONS.LOGIN_REJECTED
         });
+        throw err;
       });
   };
 };
@@ -51,10 +52,11 @@ export const logout = () => {
           type: ACTIONS.LOGOUT_FULFILLLED
         });
       })
-      .catch(() => {
+      .catch(err => {
         dispatch({
           type: ACTIONS.LOGOUT_REJECTED
         });
+        throw err;
       });
   };
 };
@@ -71,10 +73,11 @@ export const refresh = (refreshToken: string) => {
           payload: response
         });
       })
-      .catch(() => {
+      .catch(err => {
         dispatch({
           type: ACTIONS.REFRESH_REJECTED
         });
+        throw err;
       });
   };
 };

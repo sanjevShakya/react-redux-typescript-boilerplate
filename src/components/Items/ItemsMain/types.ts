@@ -10,12 +10,12 @@ export type OwnProps = {};
 
 export type StoreProps = {
   items: ItemSelectorProps.ItemListProps;
-  selectedItemId: string;
+  selectedItem: ItemProps.ItemProps;
 };
 
 export type DispatchProps = {
   fetchItems: typeof ItemActions.fetchItems;
-  createItem: typeof ItemActions.createItem;
+  saveItem: typeof ItemActions.saveItem;
   updateSelectedItem: (id: string) => void;
 };
 

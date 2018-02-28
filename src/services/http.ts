@@ -66,6 +66,15 @@ export const post: HttpActionProps = function(uri, options = {}) {
   });
 };
 
+export const put: HttpActionProps = function(uri, options = {}) {
+  let { data } = options;
+  return axios({
+    method: "put",
+    url: uri,
+    data: data
+  });
+};
+
 export default {
   get,
   post
