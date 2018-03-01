@@ -1,6 +1,5 @@
 import * as React from "react";
 import { WrappedFieldProps } from "redux-form";
-import { connect, Dispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { compose, withHandlers } from "recompose";
 
