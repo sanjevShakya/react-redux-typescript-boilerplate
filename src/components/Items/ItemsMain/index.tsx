@@ -10,13 +10,15 @@ import * as ItemFormProps from "../../Items/ItemForm/types";
 import * as StoreProps from "../../../reducers/types";
 
 import ROUTES from "../../../constants/routes";
+import ROLES from "../../../constants/roles";
 import * as ItemActions from "../../../actions/data/items";
 import * as ItemUIActions from "../../../actions/ui/items";
 import * as ItemSelectors from "../../../selectors/items";
 
 import ItemsList from "../../Items/ItemsList";
 import ItemCard from "../../Items/ItemCard";
-import ItemForm from "../../Items/ItemForm";
+import ItemEditForm from "./EditForm";
+import ItemCreateForm from "./CreateForm";
 
 class ItemsMain extends React.PureComponent<ItemsMainProps.Props> {
   constructor(props: ItemsMainProps.Props) {
@@ -41,19 +43,11 @@ class ItemsMain extends React.PureComponent<ItemsMainProps.Props> {
     return (
       <div>
         <h1>Item</h1>
-        <div>
-          <p>CREATE FORM</p>
-          <ItemForm onSubmit={this.saveItem} />
-        </div>
-        {selectedItem && (
-          <div>
-            <p>EDIT FORM</p>
-            <ItemForm
-              initialValues={{ item: selectedItem }}
-              onSubmit={this.saveItem}
-            />
-          </div>
-        )}
+        <ItemCreateForm onSubmit={this.saveItem} />
+        <ItemEditForm
+          initialValues={{ item: selectedItem }}
+          onSubmit={this.saveItem}
+        />
         <ItemsList
           items={items.data}
           isLoading={items.isLoading}

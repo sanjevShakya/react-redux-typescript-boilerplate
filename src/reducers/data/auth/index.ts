@@ -14,6 +14,12 @@ const DEFAULT_STATE: AuthProps.StateProps = {
   token: {
     access: null,
     refresh: null
+  },
+  user: {
+    id: null,
+    firstName: null,
+    lastName: null,
+    roles: []
   }
 };
 
@@ -26,6 +32,7 @@ export default (
       return {
         ...state,
         token: action.payload.token,
+        user: action.payload.user,
         isLoggedIn: true
       };
     }

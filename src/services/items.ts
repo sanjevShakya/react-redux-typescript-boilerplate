@@ -13,6 +13,8 @@ export function save(data: CreatePayload) {
     return httpUtils.post("/items", { data });
   }
   delete data.item.id;
+  delete data.item.createdAt;
+  delete data.item.updatedAt;
   delete data.item.created_at;
   delete data.item.updated_at;
   return httpUtils.put(`/items/${itemId}`, { data });

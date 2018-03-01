@@ -6,6 +6,8 @@ import * as ItemSelectorProps from "../../../selectors/items";
 import * as AuthActions from "../../../actions/data/auth";
 import * as ItemActions from "../../../actions/data/items";
 
+import withCurrentUser, * as withCurrentUserProps from "../../HOC/withCurrentUser";
+
 export type OwnProps = {};
 
 export type StoreProps = {
@@ -19,6 +21,8 @@ export type DispatchProps = {
   updateSelectedItem: (id: string) => void;
 };
 
-export type ComposeProps = StoreProps & DispatchProps;
+export type ComposeProps = StoreProps &
+  DispatchProps &
+  withCurrentUserProps.Props;
 
-export type Props = {} & OwnProps & StoreProps & DispatchProps;
+export type Props = ComposeProps & OwnProps;

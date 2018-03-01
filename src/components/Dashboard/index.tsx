@@ -23,7 +23,7 @@ class Dashboard extends React.Component<DashboardProps.Props> {
   render() {
     return (
       <div>
-        <h1>DASHBOARD</h1>
+        <h1>Dashboard</h1>
         <button onClick={() => this.props.logout()}>Log Out</button>
       </div>
     );

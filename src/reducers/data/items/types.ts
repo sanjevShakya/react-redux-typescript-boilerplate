@@ -7,8 +7,10 @@ export interface ItemProps {
   name?: string;
   description?: string;
   tags?: Array<string>;
-  updated_at?: string;
-  created_at?: string;
+  updated_at?: string; //TODO: Remove this from server response
+  created_at?: string; //TODO: Remove this from server response
+  updatedAt?: string;
+  createdAt?: string;
 }
 
 export interface MetaProps {

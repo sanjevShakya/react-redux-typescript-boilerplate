@@ -8,12 +8,23 @@ const {
   REFRESH_REJECTED
 } = AuthActions.ACTIONS;
 
+export interface CurrentUserProps {
+  id: string;
+  firstName: string;
+  lastName: string;
+  roles: Array<{
+    id: number;
+    name: string;
+  }>;
+}
+
 export interface StateProps {
   isLoggedIn: boolean;
   token: {
     access: string;
     refresh: string;
   };
+  user: CurrentUserProps;
 }
 
 export interface ActionTypes {
