@@ -14,6 +14,7 @@ import * as ItemSelectors from "../../selectors/items";
 
 import ItemsList from "../Items/ItemsList";
 import ItemCard from "../Items/ItemCard";
+import { Link } from "react-router-dom";
 
 class Dashboard extends React.Component<DashboardProps.Props> {
   constructor(props: DashboardProps.Props) {
@@ -24,6 +25,7 @@ class Dashboard extends React.Component<DashboardProps.Props> {
     return (
       <div>
         <h1>Dashboard</h1>
+        <Link to={ROUTES.ITEMS}>Items</Link>
         <button onClick={() => this.props.logout()}>Log Out</button>
       </div>
     );
