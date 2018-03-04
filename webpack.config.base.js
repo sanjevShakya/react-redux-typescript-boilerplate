@@ -6,6 +6,18 @@ let dotenv = require("dotenv");
 let APP_PATH = path.resolve(__dirname, "src");
 let BUILD_PATH = path.resolve(__dirname, "dist");
 
+let BUILD_ENV = process.env.NODE_ENV;
+
+let ENV_CONST = dotenv.config({
+  path: `${__dirname}/.env${BUILD_ENV ? "." + BUILD_ENV : ""}`
+}).parsed;
+
+if (!ENV_CONST) {
+  throw `ERROR: Environment file ".env${
+    BUILD_ENV ? "." + BUILD_ENV : ""
+  }" not found \n`;
+}
+
 module.exports = {
   devtool: "source-map",
   entry: {
@@ -51,11 +63,11 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      ENV: JSON.stringify(dotenv.config({ path: __dirname + "/.env" }).parsed)
+      ENV: JSON.stringify(ENV_CONST)
     }),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlwebpackPlugin({
-      title: "React Redux Starter",
+      title: ENV_CONST.PAGE_TITLE || "React Application",
       filename: "index.html",
       template: "index.ejs"
     })
