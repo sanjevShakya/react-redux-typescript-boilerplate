@@ -4,6 +4,7 @@ dist/
 
 .vscode/
 
-
 .env
 .env.*
+
+package-lock.json
