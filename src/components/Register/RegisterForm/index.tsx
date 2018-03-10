@@ -38,6 +38,13 @@ function RegisterForm(props: RegisterFormProps.Props) {
         component={InputField}
       />
       <Field
+        label="Password"
+        placeholder="Password"
+        name="user.password"
+        type="password"
+        component={InputField}
+      />
+      <Field
         label="Confirm password"
         placeholder="Confirm password"
         name="user.confirmPassword"
@@ -58,10 +65,14 @@ const enhance = compose<
     validate: (data: RegisterFormProps.FormDataProps) => {
       let validationData = Object.assign({}, data);
       validationData.user = validationData.user || {};
-      return ValidatorUtils.getValidationErrors(
+      let errors = ValidatorUtils.getValidationErrors(
         validationData,
         UsersSchema.create
       );
+      if (!validationData.user.confirmPassword) {
+        errors.user.confirmPassword = "This field is required";
+      }
+      return errors;
     }
   })
 );
